@@ -29,4 +29,11 @@ class MDBConsumer:
         }
         self.collection.insert_one(item)
 
+    def push_weather_data(self, uid: str, weather_data: dict) -> None:
+        """Push weather data into collection item with given user ID"""
+        self.collection.update_one(
+            {'user_id': uid},
+            {'$push': {'weather_data': weather_data}}
+        )
+
     

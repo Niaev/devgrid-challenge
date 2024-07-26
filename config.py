@@ -16,10 +16,13 @@ PORT=env('PORT')
 
 # MongoDB hostname and port
 MDB_HOST=env('MDB_HOST')
-MDB_PORT=env('MDB_PORT')
+MDB_PORT=int(env('MDB_PORT'))
 # MongoDB database and collection
 MDB_DB=env('MDB_DB')
 MDB_CL=env('MDB_CL')
+
+# Open Weather Map API key
+API_KEY=env('API_KEY')
 
 # Development stuff
 DEBUG=bool(int(env('DEBUG')))
