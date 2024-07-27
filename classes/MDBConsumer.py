@@ -5,7 +5,6 @@ from datetime import datetime
 
 # MongoDB imports
 from pymongo import MongoClient
-##from pymongo.errors import DuplicateKeyError
 
 # Environment variables
 from config import *
@@ -36,4 +35,9 @@ class MDBConsumer:
             {'$push': {'weather_data': weather_data}}
         )
 
-    
+    def pull_len_weather_data(self, uid: str) -> int:
+        """Get the length of weather data collected by given user ID"""
+        data = self.collection.find_one({'user_id': uid})
+        if type(data) == type(None):
+            return -1
+        return len(data['weather_data'])
