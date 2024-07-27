@@ -35,6 +35,7 @@ async def collect_and_store(uid: str):
     except DuplicateKeyError:
         # In case of existing user ID, return message below
         # With HTTP error 400
+        mdbc.close() # Close Mongo connection
         return {
             'message': 'User ID already in use!'
         }, 400
@@ -68,6 +69,8 @@ async def collect_and_store(uid: str):
             # Wait one minute
             sleep(60)
 
+    mdbc.close() # Close Mongo connection
+
     # Successful return
     return {
         'message': 'Success!'
@@ -92,12 +95,15 @@ def check_collection_progress(uid: str):
 
     # If there is no value for given user ID
     if n_concluded == -1:
+        mdbc.close() # Close Mongo connection
         return {
             'message': 'User ID doesn\'t exist!'
         }, 400
 
     # Calculate percentage of conclusion
     percentage = round(n_concluded / n, 2) * 100
+
+    mdbc.close() # Close Mongo connection
 
     # Successful return
     return {

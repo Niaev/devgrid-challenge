@@ -41,3 +41,7 @@ class MDBConsumer:
         if type(data) == type(None):
             return -1
         return len(data['weather_data'])
+
+    def close(self) -> None:
+        """Close connection"""
+        self.db.close()
