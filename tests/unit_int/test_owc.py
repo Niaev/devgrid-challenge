@@ -1,0 +1,1 @@
+"""Test OpenWeather API consumer cases"""

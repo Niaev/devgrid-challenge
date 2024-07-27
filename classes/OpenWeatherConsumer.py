@@ -24,7 +24,7 @@ class OWConsumer:
                                  session: aiohttp.ClientSession, 
                                  uid: str,
                                  city_id: str) -> None:
-        """"""
+        """Receive asynchronous session, user ID and city ID to collect data and store"""
         url = f'https://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={API_KEY}&units=metric'
         async with session.get(url, timeout=30) as response:
             raw_data = await response.json()
