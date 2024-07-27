@@ -12,8 +12,8 @@ from config import *
 class MDBConsumer:
     """Inserts, updates and reads data into/from MongoDB"""
 
-    def __init__(self):
-        self.db = MongoClient(MDB_HOST, MDB_PORT)
+    def __init__(self, port=MDB_PORT):
+        self.db = MongoClient(MDB_HOST, port)
         self.cli = self.db[MDB_DB]
         self.collection = self.cli[MDB_CL]
         self.collection.create_index('user_id', unique=True)
