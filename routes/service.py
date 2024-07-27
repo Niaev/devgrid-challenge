@@ -69,13 +69,19 @@ async def collect_and_store(uid: str):
         cities_ids_batches.append(cities_ids[min_pos:max_pos])
 
     # Prepare asynchronous session
-    async with aiohttp.ClientSession() as session:
-        # Do concurrent requests for each batch of cities IDs
-        for batch in cities_ids_batches:
-            tasks = [owc.get_data_and_store(session, uid, city) for city in batch]
-            _ = await asyncio.gather(*tasks)
-            # Wait one minute
-            sleep(60)
+    try:
+        timeout = aiohttp.ClientTimeout(total=60)
+        async with aiohttp.ClientSession(timeout=timeout) as session:
+            # Do concurrent requests for each batch of cities IDs
+            for batch in cities_ids_batches:
+                tasks = [owc.get_data_and_store(session, uid, city) for city in batch]
+                _ = await asyncio.gather(*tasks)
+                # Wait one minute
+                sleep(60)
+    except asyncio.TimeoutError:
+        return {
+            'message': 'Timeout error from OpenWeather API! The request limit was exceeded or the API is out of service! Data collection stopped.'
+        }, 500
 
     mdbc.close() # Close Mongo connection
 

@@ -26,7 +26,7 @@ class OWConsumer:
                                  city_id: str) -> None:
         """"""
         url = f'https://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={API_KEY}&units=metric'
-        async with session.get(url) as response:
+        async with session.get(url, timeout=30) as response:
             raw_data = await response.json()
             weather_data = {
                 'city_id': city_id,
