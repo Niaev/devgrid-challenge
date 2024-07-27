@@ -6,7 +6,7 @@ import asyncio
 from time import sleep
 
 # MongoDB imports
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, ServerSelectionTimeoutError
 
 # Flask app import
 from index import app
@@ -22,13 +22,21 @@ def test_app():
         'message': 'Running ok!'
     }, 200
 
-@app.get('/collect/<uid>')
+@app.get('/collect/<uid>') # Comment this before finishing
 @app.post('/collect/<uid>')
 async def collect_and_store(uid: str):
     """Collect data from OpenWeather API and store on MongoDB"""
 
     # Initialize MongoDB consumer
-    mdbc = MDBConsumer()
+    try:
+        mdbc = MDBConsumer()
+    except ServerSelectionTimeoutError:
+        # In case of Mongo Server out of service
+        # Return HTTP error 500
+        return {
+            'message': 'Database out of service!'
+        }, 500
+
     try:
         # Insert current request with no weather data
         mdbc.insert_new_request(uid)
@@ -81,7 +89,14 @@ def check_collection_progress(uid: str):
     """Check data collection and storage progress"""
 
     # Initialize MongoDB consumer
-    mdbc = MDBConsumer()
+    try:
+        mdbc = MDBConsumer()
+    except ServerSelectionTimeoutError:
+        # In case of Mongo Server out of service
+        # Return HTTP error 500
+        return {
+            'message': 'Database out of service!'
+        }, 500
 
     # Initialize OpenWeather API consumer
     owc = OWConsumer(mdbc)
