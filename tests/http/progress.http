@@ -1,0 +1,7 @@
+@baseUrl = http://localhost
+@port = 8080
+
+GET {{baseUrl}}:{{port}}/progress/2000
+Content-Type: application/json
+
+###

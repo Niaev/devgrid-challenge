@@ -1,0 +1,9 @@
+@baseUrl = http://localhost
+@port = 8080
+
+POST {{baseUrl}}:{{port}}/collect/2000
+Content-Type: application/json
+
+{}
+
+###
