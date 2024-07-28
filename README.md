@@ -74,7 +74,7 @@ chmod +x start.sh # Transform start.sh into an executable file
 ./start.sh # Start or Restart the application
 ```
 
-For the `./start.sh` command to work, it is needed to configure `.env` environment variables, but in this repository, the `.env` is already filled up and tracked by Git -- in a normal and common project with sensible information of a real company, `.env` should never be tracked by Git. Checkout the environment variables section.
+For the `./start.sh` command to work, it is needed to configure `.env` environment variables, but in this repository, the `.env` is already filled up and tracked by Git -- in a normal and common project with sensible information of a real company, `.env` should never be tracked by Git. Check out the environment variables section.
 
 To run on development, you can just run:
 
