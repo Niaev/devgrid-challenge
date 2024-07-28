@@ -1,12 +1,35 @@
 # DevGrid - Python Developer Challange
 
-Python Flask web application with Mongo database to collect and store data from OpenWeather API
+Python Flask web application with Mongo database to collect and store data from OpenWeather API.
+
+## Table of contents
+
+* [Requirements](#requirements)
+    * [Manual Installation](#manual-installation)
+    * [Docker and docker-compose](#docker-and-docker-compose)
+    * [Flask and uWSGI](#flask-and-uwsgi)
+    * [aiohttp](#aiohttp)
+    * [MongoDB and pymongo](#mongodb-and-pymongo)
+    * [python-dotenv](#python-dotenv)
+    * [Faker](#faker)
+* [Run the application](#run-the-application)
+    * [Manual startup and restart](#manual-startup-and-restart)
+    * [Docker installation](#docker-installation)
+    * [Environment variables configuration](#environment-variables-configuration)
+* [Test the application](#test-the-application)
+    * [Scripts](#scripts)
+        * [Unit tests and integration tests](#unit-tests-and-integration-tests)
+        * [End-to-end tests](#end-to-end-tests)
+        * [Testing everything](#testing-everything)
+    * [Manually test](#manually-test)
+        * [Collect endpoint (POST)](#collect-endpoint-post)
+        * [Progress endpoint (GET)](#progress-endpoint-get)
 
 ## Requirements
 
 ### Manual Installation
 
-Installing and setting up the web application with Docker will automatically install the Python requirements, but if it is needed to make it by hand, its possible by using virtualenv, pyenv or any other similar Python virtual environment management tools, using only Pip for the installation.
+[Installing and setting up the web application with Docker](#docker-installation) will automatically install the Python requirements, but if it is needed to make it by hand, its possible by using virtualenv, pyenv or any other similar Python virtual environment management tools, using only Pip for the installation.
 
 ```bash
 cd devgrid-challenge/ # Enter the repository root
@@ -14,6 +37,10 @@ virtualenv venv # Create local virtualenv
 source venv/bin/activate # Acitvate virtualenv
 pip install -r reqs.txt # Install the Python requirements
 ```
+
+### Docker and docker-compose
+
+For the service to run on independent virtualized containers, Docker CLI and docker-compose are requires to run the application.
 
 ### Flask and uWSGI
 
@@ -39,7 +66,7 @@ Faker is one of the most famous libraries to create random data like names, emai
 
 ### Manual startup and restart
 
-Installing and setting up the web application with Docker will automatically run the uWSGI-Flask application, but if it is needed to do it by hand, its possible by running the following commands:
+[Installing and setting up the web application with Docker](#docker-installation) will automatically run the uWSGI-Flask application, but if it is needed to do it by hand, its possible by running the following commands:
 
 ```bash
 cd devgrid-challenge/ # Enter the repository root
@@ -58,11 +85,25 @@ python3 index.py # Start application
 
 ### Docker installation
 
+With the files `Dockerfile` and `docker-compose.yaml` in the repository root folder, it is possible to set up both Python Flask application and MongoDB Server by running the following command:
+
+```bash
+docker compose up
+```
+
 ### Environment variables configuration
+
+Environment variables can be configured both on `.env` and on `docker-compose.yaml`. Nothing needs to be changed for the application to run, based on the given files. But if it is needed to change the OpenWeather API Key or MongoDB connection info, change on `.env`.
 
 ## Test the application
 
 There are two ways of running tests for this application, one of them is through running script and the other is manually testing.
+
+You can run tests both on your machine or on the virtualized container. To run inside the container, when it is running, run the following command to be able to do the testing commands shown below:
+
+```bash
+docker exec -it <container_id> bash
+```
 
 ### Scripts
 
@@ -98,7 +139,7 @@ Please, note that since end-to-end tests compose all of these tests, this comman
 
 By using any HTTP request testing tool, such as browsers, Postman, Curl or VSCode "REST Client" extension, it is possible to manually test the two endpoints of this Flask application by using the following configurations for each endpoint.
 
-#### Collect endpoint 
+#### Collect endpoint (POST)
 
 ```
 @baseUrl = http://localhost
@@ -108,11 +149,11 @@ POST {{baseUrl}}:{{port}}/collect/2000
 Content-Type: application/json
 
 {}
-
-###
 ```
 
-#### Progress endpoint
+With empty request body.
+
+#### Progress endpoint (GET)
 
 ```
 @baseUrl = http://localhost
