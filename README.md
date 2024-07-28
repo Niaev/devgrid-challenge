@@ -40,7 +40,7 @@ pip install -r reqs.txt # Install the Python requirements
 
 ### Docker and docker-compose
 
-For the service to run on independent virtualized containers, Docker CLI and docker-compose are requires to run the application.
+For the service to run on independent virtualized containers, [Docker CLI](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/) are requires to run the application.
 
 ### Flask and uWSGI
 
