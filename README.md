@@ -29,7 +29,7 @@ Python Flask web application with Mongo database to collect and store data from 
 
 ### Manual Installation
 
-[Installing and setting up the web application with Docker](#docker-installation) will automatically install the Python requirements, but if it is needed to make it by hand, its possible by using virtualenv, pyenv or any other similar Python virtual environment management tools, using only Pip for the installation.
+[Installing and setting up the web application with Docker](#docker-installation) will automatically install the Python requirements, but if it is needed to make it by hand, it is possible by using virtualenv, pyenv or any other similar Python virtual environment management tools, using only Pip for the installation.
 
 ```bash
 cd devgrid-challenge/ # Enter the repository root
@@ -40,7 +40,7 @@ pip install -r reqs.txt # Install the Python requirements
 
 ### Docker and docker-compose
 
-For the service to run on independent virtualized containers, [Docker CLI](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/) are requires to run the application.
+For the service to run on independent virtualized containers, [Docker CLI](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/) are required to run the application.
 
 ### Flask and uWSGI
 
@@ -52,11 +52,11 @@ This library was chosen to handle asynchronous requests to collect data from Ope
 
 ### MongoDB and pymongo
 
-MongoDB (7.0.12 or newer) was chosen because the data to be stored from Open Weather API will be purposefully redundant, so no need to use a relational SQL database, and because of MongoDB speed for finding data. PyMongo was chosen to be the library to connect and use MongoDB tools due to its similarities to the original Mongo Shell.
+MongoDB (7.0.12 or newer) was chosen because the data to be stored from Open Weather API will be purposefully redundant, so no need to use a relational SQL database, and because of MongoDB speed for finding data. PyMongo was chosen to be the library to connect to and use MongoDB tools due to its similarities to the original Mongo Shell.
 
 ### python-dotenv
 
-To manage project environment variables, python-dotenv allows us to create a simple `.env` file side-by-side with Python's `os.getenv` function, allowing us to use sensitive and/or mutable information inside of the code, like API keys, server ports, database location and more.
+To manage project environment variables, python-dotenv allows us to create a simple `.env` file side-by-side with Python's `os.getenv` function, allowing us to use sensitive and/or mutable information inside the code, like API keys, server ports, database location and more.
 
 ### Faker
 
@@ -66,7 +66,7 @@ Faker is one of the most famous libraries to create random data like names, emai
 
 ### Manual startup and restart
 
-[Installing and setting up the web application with Docker](#docker-installation) will automatically run the uWSGI-Flask application, but if it is needed to do it by hand, its possible by running the following commands:
+[Installing and setting up the web application with Docker](#docker-installation) will automatically run the uWSGI-Flask application, but if it is needed to do it by hand, it is possible by running the following commands:
 
 ```bash
 cd devgrid-challenge/ # Enter the repository root
@@ -93,13 +93,13 @@ docker compose up
 
 ### Environment variables configuration
 
-Environment variables can be configured both on `.env` and on `docker-compose.yaml`. Nothing needs to be changed for the application to run, based on the given files. But if it is needed to change the OpenWeather API Key or MongoDB connection info, change on `.env`.
+Environment variables can be configured both on `.env` and on `docker-compose.yaml`. Nothing needs to be changed for the application to run, based on the given files. But if it is necessary to change the OpenWeather API Key or MongoDB connection info, change on `.env`.
 
 ## Test the application
 
-There are two ways of running tests for this application, one of them is through running script and the other is manually testing.
+There are two ways of running tests for this application, one of them is through executing scripts and the other is manually testing.
 
-You can run tests both on your machine or on the virtualized container. To run inside the container, when it is running, run the following command to be able to do the testing commands shown below:
+You can run tests both on your machine or on the virtualized container. To run inside the container, when it is running, run the following command to be able to do the testing commands shown in the section below:
 
 ```bash
 docker exec -it <container_id> bash
@@ -117,7 +117,7 @@ python3 -m unittest tests.unit_int.all
 
 #### End-to-end tests
 
-The same way as above, it is possible to run end-to-end tests by running the following command:
+The same way as above, it is possible to run end-to-end tests by using the following command:
 
 ```bash
 python3 -m unittest tests.e2e.all
@@ -137,7 +137,7 @@ Please, note that since end-to-end tests compose all of these tests, this comman
 
 ### Manually test
 
-By using any HTTP request testing tool, such as browsers, Postman, Curl or VSCode "REST Client" extension, it is possible to manually test the two endpoints of this Flask application by using the following configurations for each endpoint.
+By using any HTTP request testing tool, such as browsers, Postman, Curl or VSCode "REST Client" extension, it is possible to manually test the two endpoints of this Flask application by using the following settings for each endpoint.
 
 #### Collect endpoint (POST)
 
@@ -165,4 +165,4 @@ Content-Type: application/json
 ###
 ```
 
-Obviously, updating `baseUrl` and `port` by depending on your local environment configuration.
+Reminder: updating `baseUrl` and `port` variables may be necessary to test, depending on your environment setting.
