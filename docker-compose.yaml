@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - ./mongodb:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+  web: 
+    build:
+      context: .
+    ports: 
+      - '8080:8080'
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8080
+      - WORK_DIR=/usr/src/app
+      - MDB_HOST=mongodb
+      - MDB_PORT=27017
+      - MDB_DB=weather_service
+      - MDB_CL=collection
+      - API_KEY=226d60d4785bf06d8c56d8ead7856e63
+      - DEBUG=1
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

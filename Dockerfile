@@ -7,7 +7,4 @@ RUN pip install --no-cache-dir -r reqs.txt
 
 COPY . .
 
-#RUN chmod +x ./start.sh
-#CMD [ "./start.sh" ] 
-
 CMD [ "python3", "./index.py" ]
