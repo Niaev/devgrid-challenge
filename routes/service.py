@@ -22,7 +22,6 @@ def test_app():
         'message': 'Running ok!'
     }, 200
 
-@app.get('/collect/<uid>') # Comment this before finishing
 @app.post('/collect/<uid>')
 async def collect_and_store(uid: str):
     """Collect data from OpenWeather API and store on MongoDB"""
